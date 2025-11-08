@@ -10,8 +10,8 @@ app.route('/books')
         })
     })
     .post((req, res) => {
-        const updateProduct = res.body;
-        products = { ...products, updateProduct }
+        const updateProduct = req.body;       
+     products = { ...products, ...updateProduct }        
         res.status(201).json({
             message: 'data added success',
             products,
