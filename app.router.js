@@ -5,7 +5,7 @@ const app = express();
 app.route('/books')
     .get((req, res) => {
         res.status(200).json({
-            massage:'fetch all data',
+            message: 'fetch all data',
             products,
         })
 
