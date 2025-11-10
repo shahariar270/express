@@ -1,6 +1,5 @@
 const port = 3000;
-const app = require('./app.router')
+const app = require('./query.parameter')
 
 app.listen(port, ()=>{
-    console.log(`server is ruing in ${port}`);
-})
+    console.log(`server is running in ${port}`);})
