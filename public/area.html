@@ -9,7 +9,7 @@
 
 <body>
     <h1>load html</h1>
-    <form action="/area" method="post">
+    <form id="areaForm">
         <div class="">
             <label for="length">
                 <input type="number" name="length" id="length">
@@ -20,11 +20,30 @@
             <button type="submit">register</button>
         </div>
     </form>
-    <div id="responceBox"></div>
+    <div id="responseBox"></div>
     <script>
-        const responceBox = document.getElementById('responceBox');
-        const width = document.getElementById('width');
-        const data = fetch('/area').then((res) => res.json()).then((data) => data)
+        const form = document.getElementById('areaForm');
+        const responseBox = document.getElementById('responseBox');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const length = document.getElementById('length').value;
+            const width = document.getElementById('width').value;
+
+            const res = await fetch('/area', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ length, width })
+            });
+
+            const data = await res.json();
+            if (data.code) {
+                responseBox.textContent = `${data.message}`;
+            } else {
+                responseBox.textContent = `${data.message} ${data.calculateArea}`;
+            }
+        });
     </script>
 </body>
 
