@@ -6,6 +6,10 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json())
 
+app.get('/user', (req, res) => {
+    res.sendFile(__dirname + '/public/index.html')
+})
+
 app.post('/user', (req, res) => {
     const name = req.body.name;
     res.send(`your sended data is ${name}`)
