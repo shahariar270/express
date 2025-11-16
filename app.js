@@ -1,6 +1,7 @@
-const port = 3000;
-const app = require('./areaCalculate')
+require('dotenv').config();
+const port = process.env.PORT || 3000;
+const app = require('./areaCalculate');
 
 app.listen(port, () => {
-    console.log(`server is running in ${port}`);
+    console.log(`server is running in http://localhost:${port}`);
 })
