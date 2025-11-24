@@ -5,17 +5,20 @@ const port = 8080;
 
 app.use(express.json());
 
+//logger for use debugging
 const logger = (req, res, next) => {
     console.log(`${req.method} & ${req.url}`);
     next()
 }
 app.use(logger)
+
+//authentication middleware
 const auth = (req, res) => {
     const token = req.headers.authorization;
 
     if (!token) {
         res.status(401).json({
-            message: 'unauthorization token'
+            message: 'authorization token'
         })
     }
 }
@@ -23,6 +26,14 @@ const auth = (req, res) => {
 app.get('/profile', auth, (req, res) => {
     res.status(200).json({
         message: 'data fetch successfully'
+    })
+});
+
+app.post('/data', (req, res)=>{
+    const data = req.body;
+    res.status(201).json({
+        data:data,
+        message: 'data created'
     })
 })
 
