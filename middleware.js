@@ -5,7 +5,12 @@ const port = 8080;
 
 app.use(express.json());
 
-const auth = (req, res, next) => {
+const logger = (req, res, next) => {
+    console.log(`${req.method} & ${req.url}`);
+    next()
+}
+app.use(logger)
+const auth = (req, res) => {
     const token = req.headers.authorization;
 
     if (!token) {
@@ -13,7 +18,6 @@ const auth = (req, res, next) => {
             message: 'unauthorization token'
         })
     }
-    next();
 }
 
 app.get('/profile', auth, (req, res) => {
