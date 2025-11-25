@@ -13,7 +13,7 @@ const logger = (req, res, next) => {
 app.use(logger)
 
 //authentication middleware
-const auth = (req, res) => {
+const auth = (req, res, next) => {
     const token = req.headers.authorization;
 
     if (!token) {
@@ -21,6 +21,7 @@ const auth = (req, res) => {
             message: 'authorization token'
         })
     }
+    next();
 }
 
 app.get('/profile', auth, (req, res) => {
@@ -29,10 +30,10 @@ app.get('/profile', auth, (req, res) => {
     })
 });
 
-app.post('/data', (req, res)=>{
+app.post('/data', (req, res) => {
     const data = req.body;
     res.status(201).json({
-        data:data,
+        data: data,
         message: 'data created'
     })
 })
