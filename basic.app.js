@@ -6,7 +6,7 @@ app.use(express.json())
 
 app.get('/', (res, req) => {
     req.status(200).json({
-        massage: 'sussefully Data render',
+        massage: 'sussesfully Data render',
         products,
     })
 })
