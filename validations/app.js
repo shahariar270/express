@@ -18,5 +18,4 @@ app.get('/', (req, res) => {
 
 app.listen(port, () => {
     console.log(chalk.blue.bold.italic(`server ruing at ${port}`));
-    // console.log(chalk.rgb('render successfully'));
 })
