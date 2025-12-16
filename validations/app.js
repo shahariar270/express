@@ -4,13 +4,14 @@ const morgan = require('morgan');
 const router = require('./router/router');
 const app = express();
 const cors = require('cors');
+const { default: mongoose } = require('mongoose');
+require('dotenv').config();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 app.use(cors())
-
-const port = 3000
+const port = process.env.PORT || 3000;
 
 
 app.get('/', (req, res) => {
@@ -18,6 +19,18 @@ app.get('/', (req, res) => {
         massage: 'you hit test endpoint'
     })
 })
+
+//mongo connect
+mongoose.connect(process.env.DB_URL)
+  .then(() => {
+    console.log(chalk.green.bold('MongoDB connected successfully'));
+  })
+  .catch((err) => {
+    console.error(chalk.red.bold('MongoDB connection failed ❌'));
+    console.error(err.message);
+  });
+
+
 
 app.use('/auth/', router);
 
