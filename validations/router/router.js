@@ -30,9 +30,14 @@ router.post('/register',
                 data: user
             })
         } catch (error) {
+            if (error.code === 11000) {
+                return res.status(409).json({
+                    message: 'Email already exists'
+                });
+            }
             return res.status(500).json({
                 message: error.message
-            })
+            });
         }
     })
 
