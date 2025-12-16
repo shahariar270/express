@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-router.post('/user', async(req, res) => {
+router.post('/register', async(req, res) => {
     try {
         const id = Date.now();
         const { name, email, password, dob } = req.body || {};
