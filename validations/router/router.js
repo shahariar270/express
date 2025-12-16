@@ -2,7 +2,8 @@ const express = require('express');
 const RegisterSchema = require('../config/register_config');
 const router = express.Router();
 const validation_request = require('../errorHandle/validate_request');
-const {register_validator} = require('../errorHandle/auth_validator/register_validator');
+const { register_validator } = require('../errorHandle/auth_validator/register_validator');
+const { validationResult } = require('express-validator');
 
 router.post('/register',
     register_validator,
