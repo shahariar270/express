@@ -2,21 +2,19 @@ const express = require('express');
 const router = express.Router();
 
 router.post('/user', (req, res) => {
-    try {
-        const id = Date.name();
-        const { name, email, password, dob } = req.body;
-        if (!name && !email, !password) {
-            res.status(400).json({
-                massage: `missing some payload`
-            })
-        }
-        const newUser = { id, name, email, dob };
-        res.status(201).json({
-            massage: 'new user created successfully',
-            data: newUser
-        })
+    const id = Date.now();
+    const { name, email, password, dob } = req.body || {};
 
-    } catch (error) {
-        console.log(error);
+    if (!name || !email || !password) {
+        return res.status(400).json({
+            message: 'name, email or password is missing'
+        });
     }
+    const newUser = { id, name, email, dob };
+    return res.status(201).json({
+        massage: 'new user created successfully',
+        data: newUser
+    })
 })
+
+module.exports = router;
